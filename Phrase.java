@@ -105,31 +105,28 @@ public class Phrase {
 
     // Read REQ 08
     public String capitalizeWords() {
-        int length = text.length();
-        int current = 0;
-        String word = "";
-        if (text == "" || text == null) {
+        if (text.equals("")) {
             return "";
         }
-        if (text.length() == 1) {
-            return text.toUpperCase();
-        }
-        while (current < length) {
+
+        String word = "";
+        int current = 0;
+
+        while (current < text.length()) {
+
             String currentChar = text.charAt(current) + "";
-            int charVal = (int) text.charAt(current);
+
             if (current == 0) {
+                word += currentChar.toUpperCase();
+            } else if (text.charAt(current - 1) == ' ') {
                 word += currentChar.toUpperCase();
             } else {
                 word += currentChar;
             }
-            if (charVal == 32 && current + 1 <= length - 1) {
-                String nextChar = text.charAt(current + 1) + "";
-                nextChar = nextChar.toUpperCase();
-                word += nextChar;
-                current += 1;
-            }
-            current += 1;
+
+            current++;
         }
+
         return word;
     }
 
