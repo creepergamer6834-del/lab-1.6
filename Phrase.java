@@ -140,8 +140,11 @@ public class Phrase {
         String result = "";
         String pal = text.toLowerCase();
         int last = text.length() - 1;
-        if (text == "" || text == null) {
+        if (text == null) {
             return false;
+        }
+        if (text == "") {
+            return true;
         }
         while (last >= first) {
             result += pal.charAt(last);
@@ -154,50 +157,43 @@ public class Phrase {
         return palindrome;
     }
 
-    public String everyNthChar( int n){
+    public String everyNthChar(int n) {
         int length = text.length();
         int current = 0;
-        String result = text.charAt(current) + "";
-        while (current <= length){
-            current += n;
+        String result = "";
+
+        while (current < length) {
             result += text.charAt(current);
+            current += n;
         }
+
         return result;
     }
 
-    public boolean isPalindromeIgnoringSpaces(){
-        int first = 0;
-        boolean palindrome = false;
-        String result = "";
+    public boolean isPalindromeIgnoringSpaces() {
         String pal = text.toLowerCase();
-        int last = text.length() - 1;
-        if (text == "" || text == null) {
-            return false;
-        }
-        while (last >= first) {
 
-            if ((int)(text.charAt(last)) == 32){
-                last -= 1;
-            }else{
+        String result = "";
+        int last = pal.length() - 1;
+
+        while (last >= 0) {
+            if (pal.charAt(last) != ' ') {
                 result += pal.charAt(last);
-                last -= 1;
             }
+            last--;
         }
+
         String result2 = "";
         int start = 0;
-        int end = text.length();
-        while (start <= end){
-            if ((int)(text.charAt(start)) == 32){
-                start -= 1;
-            }else{
+
+        while (start < pal.length()) {
+            if (pal.charAt(start) != ' ') {
                 result2 += pal.charAt(start);
-                start -= 1;
             }
+            start++;
         }
-        if (result.equals(result2)) {
-            palindrome = true;
-        }
-        return palindrome;
+
+        return result.equals(result2);
     }
 
 }
